@@ -1,8 +1,8 @@
 package com.example.demosecucume.Controller;
 
-import com.example.demosecucume.Entities.Habitant;
-import com.example.demosecucume.Repository.RegionRepository;
-import com.example.demosecucume.service.HabitantService;
+import com.example.demosecucume.Entities.Commentaire;
+import com.example.demosecucume.service.CommentaireService;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -14,41 +14,40 @@ import java.util.List;
 
 @Api(value = "hello", description = "Entité Habitant de API MaliTourist")
 @RestController
-@RequestMapping("/Habitant")
+@RequestMapping("/commentaire")
 @AllArgsConstructor
-public class HabitantController {
-
+public class CommentaireController {
 
     @Autowired
-    private final HabitantService habitantService;
-
+    private final CommentaireService commentaireService;
 
     @ApiOperation(value = "Juste pour ajouter le chiffre de la population pour l'API MaliTourist")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    @PostMapping("/createHabitant/{nom}")
-    public Object create(@RequestBody Habitant habitant , @PathVariable String nom){
-        return habitantService.creer(habitant,nom);
+    @PostMapping("/createcommentaire/{nomregion}/{iduser}")
+    public Object createcommentaire(@RequestBody Commentaire commentaire, @PathVariable String nomregion, @PathVariable Long iduser){
 
+        return commentaireService.creercommentaire(commentaire, nomregion, iduser);
     }
 
     @ApiOperation(value = "Juste pour avoir la liste de tout les chiffres de population par date de l'API MaliTourist")
     @PreAuthorize("hasAuthority('SCOPE_USER') or hasAuthority('SCOPE_ADMIN')")
-    @GetMapping("/readHabitant")
-    public List<Habitant> read(){
-        return habitantService.lire();
+    @GetMapping("/readcommentaire")
+    public List<Commentaire> readcommentaire(){
+
+        return commentaireService.lirecommentaire();
     }
 
     @ApiOperation(value = "Juste pour modifier un chiffre de population de  l'API MaliTourist")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    @PutMapping("/updateHabitant/{id_habitant}")
-    public Object update(@PathVariable Long id_habitant, @RequestBody Habitant habitant){
-        return habitantService.modifier(id_habitant, habitant);
+    @PutMapping("/updatecommentaire/{idcommentaire}")
+    public Object updatecommentaire(@PathVariable Long idcommentaire, @RequestBody Commentaire commentaire){
+        return commentaireService.modifiercommentaire(idcommentaire, commentaire);
     }
 
     @ApiOperation(value = "Juste pour supprimer un chiffre de population de l'API MaliTourist")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    @DeleteMapping("/deleteHabitant/{id_habitant}")
-    public Object delete(@PathVariable Long id_habitant){
-        return habitantService.supprimer(id_habitant);
+    @DeleteMapping("/deletecommentaire/{idcommentaire}")
+    public Object deletecommentaire(@PathVariable Long idcommentaire){
+        return commentaireService.supprimercommentaire(idcommentaire);
     }
 }
