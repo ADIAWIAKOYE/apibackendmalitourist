@@ -16,9 +16,12 @@ import org.springframework.security.oauth2.jwt.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,7 +55,8 @@ public class AuthController {
     @ApiOperation(value = "Ajout de region en tenant compte du pays et de la population")
     @PostMapping("/token")
     public ResponseEntity<Map< String, String>> jwtToken(
-            String grantype, String username, String password, boolean withRefreshToken, String refreshToken){
+            String grantype, String username, String password, boolean withRefreshToken, String refreshToken,
+            HttpServletResponse response){
 
         String subjecte = null;
         String scope = null;
@@ -92,23 +96,44 @@ public class AuthController {
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .subject(subjecte)
                 .issuedAt(instant)
-                .expiresAt(instant.plus(withRefreshToken?5:30, ChronoUnit.MINUTES))
+                .expiresAt(instant.plus(withRefreshToken?2:168, ChronoUnit.HOURS))
                 .issuer("security-service")
                 //pour renvoyer le role
                 .claim("scope",scope)
                 .build();
         String jwtAccessToken=jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSet)).getTokenValue();
         idToken.put("accessToken",jwtAccessToken);
+
+        // set access token in cookie
+        Cookie accessCookie = new Cookie("access_token", jwtAccessToken);
+        accessCookie.setMaxAge(7200); // 2 hours in seconds
+        accessCookie.setHttpOnly(true);
+        accessCookie.setValue(jwtAccessToken);
+        response.addCookie(accessCookie);
+
         if (withRefreshToken){
             JwtClaimsSet jwtClaimsSetRefresh = JwtClaimsSet.builder()
                     .subject(subjecte)
                     .issuedAt(instant)
-                    .expiresAt(instant.plus(30, ChronoUnit.MINUTES))
+                    .expiresAt(instant.plus(168, ChronoUnit.HOURS))
                     .issuer("security-service")
                     .build();
             String jwtRefrechToken=jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSetRefresh)).getTokenValue();
             idToken.put("refreshToken", jwtRefrechToken);
+
+            // set refresh token in cookie
+            Cookie refreshCookie = new Cookie("refresh_token", refreshToken);
+            refreshCookie.setMaxAge(604800); // 7 days in seconds
+            refreshCookie.setHttpOnly(true);
+           refreshCookie.setValue(jwtRefrechToken);
+            response.addCookie(refreshCookie);
+
         }
         return new ResponseEntity<>(idToken,HttpStatus.OK);
     }
+
+
+
+
+
 }
