@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RestController
 @NoArgsConstructor
 @Api(value = "hello", description = "Toutes les opérations concernant la table Région")
@@ -45,36 +47,35 @@ public class AuthController {
     private UserDetailsService userDetailsService;
 
 
-
     public AuthController(JwtEncoder jwtEncoder, JwtDecoder jwtDecoder, AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
         this.jwtEncoder = jwtEncoder;
         this.jwtDecoder = jwtDecoder;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
     }
+
     @ApiOperation(value = "Ajout de region en tenant compte du pays et de la population")
     @PostMapping("/token")
-    public ResponseEntity<Map< String, String>> jwtToken(
+    public ResponseEntity<Map<String, String>> jwtToken(
             String grantype, String username, String password, boolean withRefreshToken, String refreshToken,
-            HttpServletResponse response){
+            HttpServletResponse response) {
 
         String subjecte = null;
         String scope = null;
 
 
-
-        if (grantype.equals("password")){
-            System.out.println(username +"##########################" + password);
+        if (grantype.equals("password")) {
+            System.out.println(username + "##########################" + password);
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
-             subjecte=authentication.getName();
-             scope =  authentication.getAuthorities()
-                     .stream().map(auth -> auth.getAuthority())
-                     .collect(Collectors.joining(""));
+            subjecte = authentication.getName();
+            scope = authentication.getAuthorities()
+                    .stream().map(auth -> auth.getAuthority())
+                    .collect(Collectors.joining(""));
 
-        }else if (grantype.equals("refreshToken")){
-            if (refreshToken==null){
+        } else if (grantype.equals("refreshToken")) {
+            if (refreshToken == null) {
                 return new ResponseEntity<>(Map.of("errorMessage", "Refresh Token is required"), HttpStatus.UNAUTHORIZED);
             }
             Jwt decodeJWT = null;
@@ -83,10 +84,10 @@ public class AuthController {
             } catch (JwtException e) {
                 return new ResponseEntity<>(Map.of("errorMessage", e.getMessage()), HttpStatus.UNAUTHORIZED);
             }
-            subjecte= decodeJWT.getSubject();
+            subjecte = decodeJWT.getSubject();
             UserDetails userDetails = userDetailsService.loadUserByUsername(subjecte);
             Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
-            scope=authorities.stream().map(auth->auth.getAuthority()).collect(Collectors.joining(" "));
+            scope = authorities.stream().map(auth -> auth.getAuthority()).collect(Collectors.joining(" "));
 
         }
 
@@ -96,13 +97,13 @@ public class AuthController {
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .subject(subjecte)
                 .issuedAt(instant)
-                .expiresAt(instant.plus(withRefreshToken?2:168, ChronoUnit.HOURS))
+                .expiresAt(instant.plus(withRefreshToken ? 2 : 168, ChronoUnit.HOURS))
                 .issuer("security-service")
                 //pour renvoyer le role
-                .claim("scope",scope)
+                .claim("scope", scope)
                 .build();
-        String jwtAccessToken=jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSet)).getTokenValue();
-        idToken.put("accessToken",jwtAccessToken);
+        String jwtAccessToken = jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSet)).getTokenValue();
+        idToken.put("accessToken", jwtAccessToken);
 
         // set access token in cookie
         Cookie accessCookie = new Cookie("access_token", jwtAccessToken);
@@ -111,29 +112,27 @@ public class AuthController {
         accessCookie.setValue(jwtAccessToken);
         response.addCookie(accessCookie);
 
-        if (withRefreshToken){
+        if (withRefreshToken) {
             JwtClaimsSet jwtClaimsSetRefresh = JwtClaimsSet.builder()
                     .subject(subjecte)
                     .issuedAt(instant)
                     .expiresAt(instant.plus(168, ChronoUnit.HOURS))
                     .issuer("security-service")
                     .build();
-            String jwtRefrechToken=jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSetRefresh)).getTokenValue();
+            String jwtRefrechToken = jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSetRefresh)).getTokenValue();
             idToken.put("refreshToken", jwtRefrechToken);
 
             // set refresh token in cookie
             Cookie refreshCookie = new Cookie("refresh_token", refreshToken);
             refreshCookie.setMaxAge(604800); // 7 days in seconds
             refreshCookie.setHttpOnly(true);
-           refreshCookie.setValue(jwtRefrechToken);
+            refreshCookie.setValue(jwtRefrechToken);
             response.addCookie(refreshCookie);
 
         }
-        return new ResponseEntity<>(idToken,HttpStatus.OK);
+        return new ResponseEntity<>(idToken, HttpStatus.OK);
+
     }
-
-
-
 
 
 }

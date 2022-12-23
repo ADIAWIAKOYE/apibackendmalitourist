@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,8 +27,9 @@ public class HabitantServiceImpl implements HabitantService {
 
             Region region = regionRepository.findByNomregion(nom);
             habitant.setRegion(region);
+            habitant.setDate(new Date());
             habitantRepository.save(habitant);
-            return massageError.ErreurResponse("habitant ajouter avec succès", HttpStatus.OK, null);
+            return massageError.ErreurResponse("region enregistre avec succes", HttpStatus.OK, null);
         }
 
 
@@ -36,6 +38,12 @@ public class HabitantServiceImpl implements HabitantService {
     @Override
     public List<Habitant> lire() {
         return habitantRepository.findAll();
+    }
+
+    @Override
+    public List<Habitant> affichehabitant(Region idregion) {
+
+        return habitantRepository.findByRegion(idregion);
     }
 
 /*    @Override

@@ -1,6 +1,7 @@
 package com.example.demosecucume.Controller;
 
 import com.example.demosecucume.Entities.Habitant;
+import com.example.demosecucume.Entities.Region;
 import com.example.demosecucume.Repository.RegionRepository;
 import com.example.demosecucume.service.HabitantService;
 import io.swagger.annotations.Api;
@@ -11,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @Api(value = "hello", description = "Entité Habitant de API MaliTourist")
 @RestController
 @RequestMapping("/Habitant")
@@ -50,5 +51,11 @@ public class HabitantController {
     @DeleteMapping("/deleteHabitant/{id_habitant}")
     public Object delete(@PathVariable Long id_habitant){
         return habitantService.supprimer(id_habitant);
+    }
+
+    @GetMapping("/readHabitanttt/{idregion}")
+    public List<Habitant> affichehabitant(Region idregion) {
+
+        return habitantService.affichehabitant(idregion);
     }
 }

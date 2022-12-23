@@ -13,6 +13,8 @@ public interface RegionService {
 
     List<Region> lire();
 
+    Region afficher(Long idregion);
+
     Iterable<Object[]>lireFIND_REGION_AVEC_PAYS();
 
     Iterable<Object[]>lireFIND_REGION_SANS_PAYS();

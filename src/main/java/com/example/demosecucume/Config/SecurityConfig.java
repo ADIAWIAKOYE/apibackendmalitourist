@@ -121,10 +121,14 @@ public class SecurityConfig{ //extends WebSecurityConfigurerAdapter {
         return http
                 .csrf(csrf->csrf.disable())
                 .authorizeRequests(auth->auth.antMatchers("/token/**").permitAll())
+                .authorizeRequests(auth->auth.antMatchers("/region/**").permitAll())
+                .authorizeRequests(auth->auth.antMatchers("/Pays/**").permitAll())
+                .authorizeRequests(auth->auth.antMatchers("/Habitant/**").permitAll())
+                .authorizeRequests(auth->auth.antMatchers("/commentaire/**").permitAll())
                 .authorizeRequests(auth->auth.antMatchers(abasse).permitAll())
-                .authorizeRequests(auth->auth.antMatchers(HttpMethod.GET,"/colaborateur/afficheruser/").hasAnyAuthority("USER","ADMIN"))
-                .authorizeRequests(auth->auth.antMatchers(HttpMethod.POST,"/colaborateur/saveusers/").hasAnyAuthority("ADMIN"))
-                .authorizeRequests(auth->auth.antMatchers(HttpMethod.POST,"/colaborateur/saverole/").hasAnyAuthority("ADMIN"))
+               // .authorizeRequests(auth->auth.antMatchers(HttpMethod.GET,"/region/**").hasAnyAuthority("USER","ADMIN"))
+                // .authorizeRequests(auth->auth.antMatchers(HttpMethod.POST,"/colaborateur/saveusers/").hasAnyAuthority("ADMIN"))
+               // .authorizeRequests(auth->auth.antMatchers(HttpMethod.POST,"/colaborateur/saverole/").hasAnyAuthority("ADMIN"))
                 // Toutes les requetes nessecite une authentification
 //                .authenticationProvider(authenticationProvider())
                 .authorizeRequests(auth->auth.anyRequest().authenticated())

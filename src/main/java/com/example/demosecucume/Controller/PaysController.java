@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @Api(value = "hello", description = "Entité Pays de API MaliTourist")
 @RestController
 @RequestMapping("/Pays")
@@ -35,7 +36,7 @@ public class PaysController {
     }
 
     @ApiOperation(value = "Juste pour avoir la liste des pays de l'API MaliTourist")
-    @PreAuthorize("hasAuthority('SCOPE_USER') or hasAuthority('SCOPE_ADMIN')")
+   // @PreAuthorize("hasAuthority('SCOPE_USER') or hasAuthority('SCOPE_ADMIN')")
     @GetMapping("/read")
     public List<Pays> read() {
         return paysService.lire();

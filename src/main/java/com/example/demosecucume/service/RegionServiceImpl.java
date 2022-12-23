@@ -45,6 +45,17 @@ public class RegionServiceImpl implements RegionService{
     }
 
     @Override
+    public Region afficher(Long idregion) {
+
+        return regionRepository.findById(idregion).get();
+    }
+
+    public Region afficherr(Long idregion) {
+
+        return regionRepository.findById(idregion).get();
+    }
+
+    @Override
     public Iterable<Object[]> lireFIND_REGION_AVEC_PAYS() {
 
         return  regionRepository.FIND_REGION_AVEC_PAYS();
@@ -78,6 +89,7 @@ public class RegionServiceImpl implements RegionService{
             region1.setDoactivite(region.getDoactivite());
             region1.setLanparle(region.getLanparle());
             region1.setSuperficie(region.getSuperficie());
+            region1.setDescription(region.getDescription());
             regionRepository.saveAndFlush(region1);
             return massageError.ErreurResponse("region modifier avec succes", HttpStatus.OK, null);
         }

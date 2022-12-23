@@ -1,6 +1,8 @@
 package com.example.demosecucume.Controller;
 
 import com.example.demosecucume.Entities.Commentaire;
+import com.example.demosecucume.Entities.Habitant;
+import com.example.demosecucume.Entities.Region;
 import com.example.demosecucume.service.CommentaireService;
 
 import io.swagger.annotations.Api;
@@ -49,5 +51,11 @@ public class CommentaireController {
     @DeleteMapping("/deletecommentaire/{idcommentaire}")
     public Object deletecommentaire(@PathVariable Long idcommentaire){
         return commentaireService.supprimercommentaire(idcommentaire);
+    }
+
+    @GetMapping("/readCommentairett/{idregion}")
+    public List<Commentaire> affichecommentaire(Region idregion) {
+
+        return commentaireService.affichecommentaire(idregion);
     }
 }

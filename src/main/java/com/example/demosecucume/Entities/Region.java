@@ -24,6 +24,7 @@ public class Region {
     private String doactivite;
     private String lanparle;
     private String superficie;
+    private String description;
     private String imageregion;
 
 

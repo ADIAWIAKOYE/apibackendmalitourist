@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @Api(value = "hello", description = "Toutes les opérations concernant la table Région")
 @RestController
 @RequestMapping("/colaborateur")

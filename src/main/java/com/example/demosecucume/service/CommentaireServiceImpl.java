@@ -62,4 +62,10 @@ public class CommentaireServiceImpl implements CommentaireService{
              }
         return massageError.ErreurResponse("cet commentaire n'existe pas ", HttpStatus.BAD_REQUEST, null);
     }
+
+    @Override
+    public List<Commentaire> affichecommentaire(Region idregion) {
+
+        return commentaireRepository.findByRegion(idregion);
+    }
 }
