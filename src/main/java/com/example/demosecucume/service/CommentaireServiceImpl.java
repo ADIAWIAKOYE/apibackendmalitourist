@@ -20,17 +20,17 @@ public class CommentaireServiceImpl implements CommentaireService{
     private final AppUserRepo appUserRepo;
 
     @Override
-    public Object creercommentaire(Commentaire commentaire, String nomregion, Long iduser) {
+    public Object creercommentaire(Commentaire commentaire, String nomregion, String nom) {
         if (regionRepository.findByNomregion(nomregion) == null){
             return massageError.ErreurResponse("cet region n'exite pas ", HttpStatus.BAD_REQUEST, null);
         } else {
              Region region = regionRepository.findByNomregion(nomregion);
             commentaire.setRegion(region);
         }
-        if (appUserRepo.findByIduser(iduser) == null){
+        if (appUserRepo.findByNom(nom) == null){
             return massageError.ErreurResponse("cet user n'exite pas ", HttpStatus.BAD_REQUEST, null);
         }else {
-            AppUser appUser = appUserRepo.findByIduser(iduser);
+            AppUser appUser = appUserRepo.findByNom(nom);
             commentaire.setAppUser(appUser);
         }
         commentaireRepository.save(commentaire);

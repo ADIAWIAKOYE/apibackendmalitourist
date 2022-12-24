@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @Api(value = "hello", description = "Entité Habitant de API MaliTourist")
 @RestController
 @RequestMapping("/commentaire")
@@ -24,11 +25,11 @@ public class CommentaireController {
     private final CommentaireService commentaireService;
 
     @ApiOperation(value = "Juste pour ajouter le chiffre de la population pour l'API MaliTourist")
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-    @PostMapping("/createcommentaire/{nomregion}/{iduser}")
-    public Object createcommentaire(@RequestBody Commentaire commentaire, @PathVariable String nomregion, @PathVariable Long iduser){
+   // @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    @PostMapping("/createcommentaire/{nomregion}/{nom}")
+    public Object createcommentaire(@RequestBody Commentaire commentaire, @PathVariable String nomregion, @PathVariable String nom){
 
-        return commentaireService.creercommentaire(commentaire, nomregion, iduser);
+        return commentaireService.creercommentaire(commentaire, nomregion, nom);
     }
 
     @ApiOperation(value = "Juste pour avoir la liste de tout les chiffres de population par date de l'API MaliTourist")
@@ -57,5 +58,11 @@ public class CommentaireController {
     public List<Commentaire> affichecommentaire(Region idregion) {
 
         return commentaireService.affichecommentaire(idregion);
+    }
+
+    @GetMapping("/readCommentairenombre/{idregion}")
+    public int affichecommentairenombre(Region idregion) {
+
+        return commentaireService.affichecommentaire(idregion).size();
     }
 }

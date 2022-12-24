@@ -1,41 +1,4 @@
-2022-12-23 16:38:09.808  INFO 876 --- [restartedMain] c.e.d.DemoSecuCumeApplication            : Starting DemoSecuCumeApplication using Java 18.0.2 on DESKTOP-L8U7D7P with PID 876 (C:\Users\ADIAWIAKOYE\Documents\Secucum\target\classes started by ADIAWIAKOYE in C:\Users\ADIAWIAKOYE\Documents\Secucum)
-2022-12-23 16:38:09.826  INFO 876 --- [restartedMain] c.e.d.DemoSecuCumeApplication            : No active profile set, falling back to 1 default profile: "default"
-2022-12-23 16:38:09.944  INFO 876 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2022-12-23 16:38:09.945  INFO 876 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2022-12-23 16:38:11.397  INFO 876 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-23 16:38:11.518  INFO 876 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 112 ms. Found 6 JPA repository interfaces.
-2022-12-23 16:38:12.736  INFO 876 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-23 16:38:12.752  INFO 876 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-23 16:38:12.754  INFO 876 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
-2022-12-23 16:38:12.913  INFO 876 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-23 16:38:12.913  INFO 876 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2966 ms
-2022-12-23 16:38:13.195  INFO 876 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-23 16:38:13.303  INFO 876 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
-2022-12-23 16:38:13.579  INFO 876 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2022-12-23 16:38:13.769  INFO 876 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-23 16:38:14.047  INFO 876 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-23 16:38:14.088  INFO 876 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
-2022-12-23 16:38:15.227  INFO 876 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-23 16:38:15.238  INFO 876 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-23 16:38:16.380  WARN 876 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-12-23 16:38:16.758  INFO 876 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@79c61d58, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4858294d, org.springframework.security.web.context.SecurityContextPersistenceFilter@5040300e, org.springframework.security.web.header.HeaderWriterFilter@74805e64, org.springframework.security.web.authentication.logout.LogoutFilter@650d71c3, org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationFilter@7e2ea1ea, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4fd8ac39, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@68b30087, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ce749f3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42ebed1b, org.springframework.security.web.session.SessionManagementFilter@7111ac45, org.springframework.security.web.access.ExceptionTranslationFilter@da2d273, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2b758232]
-2022-12-23 16:38:16.794  INFO 876 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2022-12-23 16:38:17.266  INFO 876 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2022-12-23 16:38:17.607  INFO 876 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-23 16:38:17.609  INFO 876 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2022-12-23 16:38:17.638  INFO 876 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2022-12-23 16:38:17.686  INFO 876 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2022-12-23 16:38:17.954  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
-2022-12-23 16:38:17.958  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_1
-2022-12-23 16:38:17.962  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: readUsingGET_1
-2022-12-23 16:38:17.964  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_1
-2022-12-23 16:38:17.977  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_2
-2022-12-23 16:38:17.987  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteUsingDELETE_2
-2022-12-23 16:38:17.996  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: readUsingGET_2
-2022-12-23 16:38:17.999  INFO 876 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUsingPUT_2
-2022-12-23 16:38:18.029  INFO 876 --- [restartedMain] c.e.d.DemoSecuCumeApplication            : Started DemoSecuCumeApplication in 8.905 seconds (JVM running for 12.406)
-2022-12-23 16:38:27.987  INFO 876 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-23 16:38:27.988  INFO 876 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-23 16:38:27.990  INFO 876 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2022-12-23 16:40:02.970  INFO 876 --- [http-nio-8080-exec-8] c.e.d.service.CustomUserDetailsService   : Utilisateur  trouvé
-2022-12-23 16:44:02.769  INFO 876 --- [http-nio-8080-exec-5] c.e.d.service.CustomUserDetailsService   : Utilisateur  trouvé
+2022-12-24 01:57:36.263  WARN 21496 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m48s655ms799µs400ns).
+2022-12-24 06:05:39.481  WARN 21496 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h55m32s949ms823µs100ns).
+2022-12-24 07:09:20.758  WARN 21496 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=27m10s721ms234µs900ns).
+2022-12-24 09:42:25.312  WARN 21496 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m13s799ms983µs700ns).

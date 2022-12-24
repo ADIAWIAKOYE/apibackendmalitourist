@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public interface CommentaireService {
 
-    Object creercommentaire(Commentaire commentaire, String nomregion, Long iduser );
+    Object creercommentaire(Commentaire commentaire, String nomregion, String nom );
 
     List<Commentaire> lirecommentaire();
 

@@ -18,6 +18,7 @@ public class TestRestAPI {
 
         return Map.of(
                 "message", "Data test",
+
                 "username",authentication.getName(),
                 "authorities",authentication.getAuthorities()
         );
